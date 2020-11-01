@@ -68,6 +68,7 @@ export const userSignIn = ({email, password}) => {
       console.log("userSignIn: ", data);
       if (data.jwt) {
         localStorage.setItem("token", JSON.stringify(data.jwt));
+        localStorage.setItem("user", JSON.stringify(data));
         axios.defaults.headers.common['Authorization'] = "Bearer " + data.jwt;
         dispatch({type: FETCH_SUCCESS});
         dispatch({type: SCREENIT_USER, payload: data});

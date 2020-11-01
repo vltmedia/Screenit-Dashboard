@@ -14,16 +14,23 @@ const UserInfo = () => {
 
   const [anchorE1, setAnchorE1] = useState(null);
   const [open, setOpen] = useState(false);
+  let jwt = useSelector(state => state.auth.token);
+  // let jwt = useSelector(state => state.auth.authUser.jwt);
   let userinfoo = useSelector(state => state.auth.userInfo);
   let usernamee = "";
+
   try{
   usernamee = userinfoo.username;
   }catch{
+    alert("Fuck I FAILED A");
     handleRequestClose();
-    dispatch(userSignOut());
+    // dispatch(userSignOut());
   }
-  if(userinfoo.username == null){
-    dispatch(userSignOut());
+  // if(userinfoo.username == null){
+  if(jwt == null){
+    alert("Fuck I FAILED B");
+
+    // dispatch(userSignOut());
     window.location.reload(true);
   }
   console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
@@ -46,7 +53,7 @@ const UserInfo = () => {
         className="user-avatar "
       />
       <div className="user-detail">
-          <h4 className="user-name d-flex" onClick={handleClick}><span className='text-truncate'>{useSelector(state => state.auth.userInfo.username)}</span> <i
+          <h4 className="user-name d-flex" onClick={handleClick}><span className='text-truncate'>{useSelector(state => state.screenit.userInfo.username)}</span> <i
           className="zmdi zmdi-caret-down zmdi-hc-fw align-middle"/>
         </h4>
       </div>

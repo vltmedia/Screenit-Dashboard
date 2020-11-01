@@ -7,6 +7,7 @@ import IntlMessages from 'util/IntlMessages';
 import {userSignIn} from 'actions/Auth';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {NotificationContainer, NotificationManager} from "react-notifications";
+import UploadMediaEntry from '../components/UploadMediaEntry';
 
 const SignIn = (props) => {
 
@@ -26,6 +27,7 @@ const SignIn = (props) => {
     <div
       className="app-login-container d-flex justify-content-center align-items-center animated slideInUpTiny animation-duration-3">
       <div className="app-login-main-content">
+        
 
         <div className="app-logo-content d-flex align-items-center justify-content-center">
           <Link className="logo-lg" to="/" title="Jambo">

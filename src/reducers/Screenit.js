@@ -5,13 +5,13 @@ import "video-react/dist/video-react.css"; // import css
 import PlaceholderMediaContainer from '../containers/PlaceholderMediaContainer';
 
 const INIT_STATE = {
-  token: {},
+  token: JSON.parse(localStorage.getItem('user')).jwt,
   initURL: '',
-  authUser: {},
-  userInfo:{},
-  clientsInfo:{},
-  projectsInfo:{},
-  mediaentriesInfo:{},
+  authUser: JSON.parse(localStorage.getItem('user')),
+  userInfo:JSON.parse(localStorage.getItem('user')).user,
+  clientsInfo:JSON.parse(localStorage.getItem('user')).user.Clients,
+  projectsInfo:JSON.parse(localStorage.getItem('user')).user.Projects,
+  mediaentriesInfo:JSON.parse(localStorage.getItem('user')).user.MediaEntries,
 
   clientsAll:{},
   projectsAll:{},

@@ -1,0 +1,19 @@
+.MediaEntryInput-Media{
+
+    width: 100%;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    background-color: #ebdefd;
+
+}.MediaEntryInput-MediaMultiLine{
+
+    /* width: 100%; */
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    background-color: #ebdefd;
+
+}

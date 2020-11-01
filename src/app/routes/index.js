@@ -6,6 +6,9 @@ const Routes = ({match}) =>
   <Switch>
     <Route path={`${match.url}/media-view`}
            component={asyncComponent(() => import('./MediaView'))}/>
+           
+    <Route path={`${match.url}/sandbox`}
+           component={asyncComponent(() => import('./Sandbox'))}/>
     <Route path={`${match.url}/about-us`}
            component={asyncComponent(() => import('./AboutUs'))}/>
     {/*<Route component={asyncComponent(() => import("app/routes/extraPages/routes/404"))}/>*/}

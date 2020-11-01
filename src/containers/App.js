@@ -6,6 +6,7 @@ import URLSearchParams from "url-search-params";
 import MomentUtils from "@date-io/moment";
 import {MuiPickersUtilsProvider} from "material-ui-pickers";
 import {Redirect, Route, Switch} from "react-router-dom";
+
 import {useDispatch, useSelector} from "react-redux";
 import {IntlProvider} from "react-intl";
 import "assets/vendors/style";
@@ -38,6 +39,7 @@ import {
 } from "constants/ThemeColors";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import SignOutForce from "./SignOutForce";
 import {setInitUrl} from "../actions/Auth";
 import RTL from "util/RTL";
 import {setDarkTheme, setThemeColor} from "../actions/Setting";
@@ -60,7 +62,7 @@ const RestrictedRoute = ({component: Component, token, ...rest}) =>
 const App = (props) => {
   const dispatch = useDispatch();
   const {themeColor, darkTheme, locale, isDirectionRTL} = useSelector(({settings}) => settings);
-  const {token, initURL} = useSelector(({auth}) => auth);
+  const {token, initURL, authUser} = useSelector(({auth}) => auth);
   const isDarkTheme = darkTheme;
   const {match, location} = props;
 
@@ -174,14 +176,30 @@ const App = (props) => {
     applyTheme = getColorTheme(themeColor, applyTheme);
   }
   if (location.pathname === '/') {
-    if (token === null) {
+    // if (token === null) {
+    if (authUser === null) {
+      // alert("FAIL A");
+
       return (<Redirect to={'/signin'}/>);
+      // return (<Redirect to={'/signin'}/>);
     } else if (initURL === '' || initURL === '/' || initURL === '/signin') {
+      // alert("GOOD A");
+
       return (<Redirect to={'/app/media-view'}/>);
-    } else {
+    }
+     else if (initURL === '' || initURL === '/' || initURL === '/signin') {
+      // alert("GOOD B");
+
+      return (<Redirect to={'/app/sandbox'}/>);
+    }
+    
+    else {
+      // alert("FAIL");
       return (<Redirect to={initURL}/>);
     }
   }
+
+
   if (isDirectionRTL) {
     applyTheme.direction = 'rtl';
     document.body.classList.add('rtl')
@@ -201,10 +219,12 @@ const App = (props) => {
           <RTL>
             <div className="app-main">
               <Switch>
+                {/* <RestrictedRoute path={`${match.url}app`} token={token} */}
                 <RestrictedRoute path={`${match.url}app`} token={token}
                                  component={AppLayout}/>
                 <Route path='/signin' component={SignIn}/>
                 <Route path='/signup' component={SignUp}/>
+                <Route path='/signoutforce' component={SignOutForce}/>
                 {/*<Route*/}
                 {/*  component={asyncComponent(() => import('app/routes/extraPages/routes/404'))}/>*/}
               </Switch>

@@ -10,6 +10,12 @@ const SideBarContent = () => {
       link:'/app/media-view'
 
     },
+    {
+      name: 'Sandbox',
+      type: 'item',
+      link:'/app/sandbox'
+
+    }
   ];
 
   return (

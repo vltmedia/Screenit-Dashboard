@@ -27,7 +27,7 @@ let statee = {
 let clientchoice = "NOONOO";
 
 // Version to Drop into SVG Group
-const SelectDropDownBorderedSVG = (props) => {
+const MenuItemBorderedSVG = (props) => {
   const dispatch = useDispatch();
 
   const token = useSelector(state => state.screenit.token);
@@ -74,9 +74,9 @@ const SelectDropDownBorderedSVG = (props) => {
 
 
             
-              <foreignObject width="327" height="150"  className="i" transform="translate(2 0)">
+              <foreignObject width="327" height="150"  className="i" transform="translate(5 24)">
       <div xmlns="http://www.w3.org/1999/xhtml">
-      <SelectDropDown changed={props.changed} title=""  subtitle="" defaultval={props.Client} items={props.items} className={props.classname} />
+      {props.htmlcontent}
           </div>
   </foreignObject>
   </g>
@@ -92,7 +92,7 @@ const SelectDropDownBorderedSVG = (props) => {
 
 
 // Non SVG version.
-const SelectDropDownBordered = (props) => {
+const MenuItemBordered = (props) => {
   const dispatch = useDispatch();
 
   const token = useSelector(state => state.screenit.token);
@@ -232,9 +232,11 @@ const SelectDropDownBordered = (props) => {
               </text>
 
 
-              <foreignObject width="327" height="150"  className="i" transform="translate(2 0)">
+              <foreignObject width="327" height="150"  className="i" transform="translate(0 480)">
       <div xmlns="http://www.w3.org/1999/xhtml">
-      <SelectDropDownBorderedSVG changed={props.changed} title=""  subtitle="" defaultval={props.Client} items={props.items} className={props.classname} />
+        
+      
+      <MenuItemBorderedSVG changed={props.changed} htmlcontent={props.htmlcontent}  title=""  subtitle="" defaultval={props.Client} items={props.items} className={props.classname} />
           </div>
   </foreignObject>
               
@@ -248,4 +250,4 @@ const SelectDropDownBordered = (props) => {
 };
 
 
-export  {SelectDropDownBordered, SelectDropDownBorderedSVG};
+export  {MenuItemBordered, MenuItemBorderedSVG};

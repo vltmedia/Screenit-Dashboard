@@ -15,10 +15,16 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import SelectDropDown from '../../components/SelectDropDown';
-import SelectDropDownBordered from '../../components/SelectDropDownBordered';
+import {SelectDropDownBorderedSVG, SelectDropDownBordered} from '../../components/SelectDropDownBordered';
+import {MenuItemBorderedSVG, MenuItemBordered} from '../../components/MenuItemBordered';
+import {ToggleBoxSVG, ToggleBox} from '../../components/ToggleBox';
+import {InputTextBorderedSVG, InputTextBordered} from '../../components/InputTextBordered';
 import React from "react";
+import {Card, CardBody, CardImg, CardSubtitle, CardText} from 'reactstrap';
 
 import '../../styles/screenit/screenitStyle.css';
+
+const PlaceholderImage = require("assets/images/Screenit_SelectMedia.png");
 
 class UploadMediaComponent extends React.Component {
   constructor(props) {
@@ -34,7 +40,8 @@ class UploadMediaComponent extends React.Component {
         VersionType:"",
 
         Client:"",
-        Project:""
+        Project:"",
+        Mature: false
 
 
       }
@@ -45,17 +52,46 @@ class UploadMediaComponent extends React.Component {
       this.VersionDescriptionChanged = this.VersionDescriptionChanged.bind(this);
       this.DescriptionChanged = this.DescriptionChanged.bind(this);
       this.ClientChanged = this.ClientChanged.bind(this);
+      this.ProjectChanged = this.ProjectChanged.bind(this);
+      this.VersionTypeChanged = this.VersionTypeChanged.bind(this);
+      this.MatureChanged = this.MatureChanged.bind(this);
+      this.UploadThumbnailClicked = this.UploadThumbnailClicked.bind(this);
+      this.UploadMediaClicked = this.UploadMediaClicked.bind(this);
+      this.UpdateMediaEntryClicked = this.UpdateMediaEntryClicked.bind(this);
+      this.CanceledClicked = this.CanceledClicked.bind(this);
 
   }
 
 
-  ClientChanged(val){
 
-    console.log(val);
-    this.setState({mediaInfo:val});
 
+  UpdateMediaEntryClicked(){
+
+    console.log("Update Media Entry Clicked");
+ 
   }
 
+
+  CanceledClicked(){
+
+    console.log("Canceled Clicked");
+ 
+  }
+
+
+  UploadThumbnailClicked(){
+
+    console.log("Upload Thumbnail Clicked");
+ 
+  }
+
+
+
+  UploadMediaClicked(){
+
+    console.log("Upload Media Clicked");
+ 
+  }
 
 
   TitleChanged(e){
@@ -92,10 +128,44 @@ class UploadMediaComponent extends React.Component {
     this.setState({mediaInfo:newmediainfo});
   }
 
+  ClientChanged(val){
+
+    console.log(val);
+    var newmediainfo = this.state.mediaInfo;
+    newmediainfo.Client = val;
+    this.setState({mediaInfo:newmediainfo});
+  }
+  ProjectChanged(val){
+
+    console.log(val);
+    var newmediainfo = this.state.mediaInfo;
+    newmediainfo.Project = val;
+    this.setState({mediaInfo:newmediainfo});
+  }
+  VersionTypeChanged(val){
+
+    console.log(val);
+    var newmediainfo = this.state.mediaInfo;
+    newmediainfo.VersionType = val;
+    this.setState({mediaInfo:newmediainfo});
+  }
+  MatureChanged(val){
+
+    var newmediainfo = this.state.mediaInfo;
+    var Mature =newmediainfo.Mature;
+    // var inv = val;
+
+    var inv = !Mature;
+    newmediainfo.Mature = inv;
+    console.log(inv);
+
+    this.setState({mediaInfo:newmediainfo});
+  }
+
   render() { 
     return ( 
       <div>
-        <SelectDropDownBordered/>
+
       <svg viewBox="0 0 1198 953">
       <defs>
         <style>
@@ -110,7 +180,7 @@ class UploadMediaComponent extends React.Component {
           height="100%"
           viewBox="0 0 360 360"
         >
-          <image width={360} height={360} xlinkHref="ComponentTMP_0-image.png" />
+          <image width={360} height={360} xlinkHref={require("assets/images/Screenit_SelectMedia.png")} />
         </pattern>
         <filter
           id="c"
@@ -203,37 +273,52 @@ class UploadMediaComponent extends React.Component {
               {"Help Center."}
             </tspan>
           </text>
+         
+          
           <path
             className="e"
             d="M4,0H710a4,4,0,0,1,4,4V402a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V4A4,4,0,0,1,4,0Z"
             transform="translate(0 3)"
           />
+
+
           <g transform="translate(572 419)">
-            <rect className="f" width={143} height={32} rx={4} />
-            <text className="g" transform="translate(70.194 21)">
-              <tspan x={-57.666} y={0}>
-                {"Upload Media File"}
-              </tspan>
-            </text>
-          </g>
-          <g transform="translate(3 466)">
-            <g transform="translate(218)">
-              <g className="h" transform="translate(0 8)">
-                <rect className="ae" width={493} height={56} rx={4} />
-                <rect className="a" x={1} y={1} width={491} height={54} rx={3} />
-              </g>
-              <foreignObject width="460" height="150"  className="i" transform="translate(16 21)">
+          <foreignObject width="460" height="150"  className="i" transform="translate(-28 0)">
       <div xmlns="http://www.w3.org/1999/xhtml">
-      <input className="MediaEntryInput-Media" onChange={this.TitleChanged}></input>
+        <Button className="SVGButton_PrimaryUploadMedia" onClick={this.UploadMediaClicked} size='small'  variant="outlined" color="primary">
+        Upload Thumbnail
+</Button>
           </div>
   </foreignObject>
+          </g>
+
+          <g transform="translate(3 466)">
+              
+            <g transform="translate(218)">
+      <InputTextBorderedSVG onChange={this.TitleChanged} maskwidth={100} maskheight={20} boxwidth={490} boxheight={66} title="" header="Title" subtitle=""  header="Title" className="MediaEntryInput-ClientDropDown" />
+
+              {/* <g className="h" transform="translate(0 8)">
+                <rect className="ae" width={493} height={56} rx={4} />
+                <rect className="a" x={1} y={1} width={491} height={54} rx={3} />
+              </g> */}
+
+              {/* <foreignObject width="460" height="150"  className="i" transform="translate(16 21)">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+      <InputTextBordered onChange={this.TitleChanged} maskwidth={100} maskheight={20} boxwidth={1660} boxheight={150} transform="translate(0 21)" title="" header="Title" subtitle=""  className="MediaEntryInput-InputText" /> */}
+
+
+      {/* <input className="MediaEntryInput-Media" onChange={this.TitleChanged}></input> */}
+          {/* </div>
+  </foreignObject> */}
+{/*   
   <text className="j" transform="translate(16 11)">
+
                 <tspan x={0} y={0}>
                   {"Title"}
                 </tspan>
               </text>
-      
-              <text className="j" transform="translate(16 79)">
+       */}
+              {/* <text className="j" transform="translate(16 79)">
                 <tspan x={0} y={0}>
                   {"The media's Title or name."}
                 </tspan>
@@ -243,9 +328,11 @@ class UploadMediaComponent extends React.Component {
                 width={44}
                 height={7}
                 transform="translate(11 6)"
-              />
+              /> */}
          
             </g>
+
+            
             <g transform="translate(218 102)">
               <g className="h" transform="translate(0 8)">
                 <rect className="ae" width={493} height={56} rx={4} />
@@ -363,37 +450,24 @@ class UploadMediaComponent extends React.Component {
               d="M4,0H163a4,4,0,0,1,4,4V94a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V4A4,4,0,0,1,4,0Z"
               transform="translate(11 17)"
             />
-            <g transform="translate(0 153)">
-              <rect className="f" width={191} height={30} rx={4} />
-              <text className="g" transform="translate(91.873 19.933)">
-                <tspan x={-58.441} y={0}>
-                  {"Upload Thumbnail"}
-                </tspan>
-              </text>
+            <g transform="translate(0 153)" >
+             
+              <foreignObject width="460" height="150"  className="i" transform="translate(0 -14)">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <Button className="SVGButton_Primary" onClick={this.UploadThumbnailClicked}  variant="outlined" color="primary">
+        Upload Thumbnail
+</Button>
+          </div>
+  </foreignObject>
             </g>
           </g>
           <g transform="translate(776)">
             <g transform="translate(0 104)">
-              <g className="h" transform="translate(0 8)">
-                <rect className="ae" width={342} height={68} rx={4} />
-                <rect className="a" x={1} y={1} width={340} height={66} rx={3} />
-              </g>
-              <rect
-                className="c"
-                width={77}
-                height={11}
-                transform="translate(11 6)"
-              />
-              <text className="j" transform="translate(17 11)">
-                <tspan x={0} y={0}>
-                  {"Client"}
-                </tspan>
-              </text>
-              <foreignObject width="327" height="150"  className="i" transform="translate(2 0)">
-      <div xmlns="http://www.w3.org/1999/xhtml">
-      <SelectDropDown changed={this.ClientChanged} title=""  subtitle="" defaultval={this.state.mediaInfo.Client} items={[{name:"Jw"}, {name:"Rogue"}, {name:"Knuckles"} ]} className="MediaEntryInput-ClientDropDown" />
-          </div>
-  </foreignObject>
+              
+             
+     
+      <SelectDropDownBorderedSVG changed={this.ClientChanged} maskwidth={100} maskheight={20} boxwidth={342} boxheight={66} title="" header="Client" subtitle="" defaultval={this.state.mediaInfo.Client} items={[{name:"Jw"}, {name:"Rogue"}, {name:"Knuckles"} ]} className="MediaEntryInput-ClientDropDown" />
+  
 {/*               
               <g transform="translate(17.5 16.5)">
                 <g className="aj" transform="matrix(1, 0, 0, 1, -827.5, -149.5)">
@@ -438,203 +512,30 @@ class UploadMediaComponent extends React.Component {
 
             </g>
             <g transform="translate(0 208)">
-              <g className="h" transform="translate(0 8)">
-                <rect className="ae" width={342} height={68} rx={4} />
-                <rect className="a" x={1} y={1} width={340} height={66} rx={3} />
-              </g>
-              <rect
-                className="c"
-                width={77}
-                height={11}
-                transform="translate(11 6)"
-              />
-              <text className="j" transform="translate(17 11)">
-                <tspan x={0} y={0}>
-                  {"Project"}
-                </tspan>
-              </text>
-              <g transform="translate(17.5 16.5)">
-                <g className="ai" transform="matrix(1, 0, 0, 1, -827.5, -253.5)">
-                  <rect
-                    className="c"
-                    width={308}
-                    height={44}
-                    rx={4}
-                    transform="translate(827.5 253.5)"
-                  />
-                </g>
-                <text className="l" transform="translate(7.977 28)">
-                  <tspan x={0} y={0}>
-                    {"Winter - Outreach"}
-                  </tspan>
-                </text>
-                <g className="m" transform="translate(298 35) rotate(180)">
-                  <rect className="a" width={24} height={24} />
-                  <path
-                    className="n"
-                    d="M111-20l5,5,5-5Z"
-                    transform="translate(128 -5) rotate(180)"
-                  />
-                </g>
-                <rect
-                  className="o"
-                  width={302}
-                  height={1}
-                  transform="translate(0 43)"
-                />
-                <rect
-                  className="o"
-                  width={1}
-                  height={43}
-                  transform="translate(261.885)"
-                />
-              </g>
+              
+
+              <SelectDropDownBorderedSVG changed={this.ProjectChanged}  maskwidth={100} maskheight={20} boxwidth={342} boxheight={66}  title="" header="Project" subtitle="" defaultval={this.state.mediaInfo.Client} items={[{name:"Jw"}, {name:"Rogue"}, {name:"Knuckles"} ]} className="MediaEntryInput-ClientDropDown" />
+
+
             </g>
+
             <g transform="translate(0 312)">
-              <g className="h" transform="translate(0 8)">
-                <rect className="ae" width={342} height={68} rx={4} />
-                <rect className="a" x={1} y={1} width={340} height={66} rx={3} />
-              </g>
-              <rect
-                className="c"
-                width={98}
-                height={11}
-                transform="translate(11 6)"
-              />
-              <text className="j" transform="translate(17 11)">
-                <tspan x={0} y={0}>
-                  {"Version Type"}
-                </tspan>
-              </text>
-              <g transform="translate(17.5 16.5)">
-                <g className="ah" transform="matrix(1, 0, 0, 1, -827.5, -357.5)">
-                  <rect
-                    className="c"
-                    width={308}
-                    height={44}
-                    rx={4}
-                    transform="translate(827.5 357.5)"
-                  />
-                </g>
-                <text className="l" transform="translate(7.977 28)">
-                  <tspan x={0} y={0}>
-                    {"Work In Progress"}
-                  </tspan>
-                </text>
-                <g className="m" transform="translate(298 35) rotate(180)">
-                  <rect className="a" width={24} height={24} />
-                  <path
-                    className="n"
-                    d="M111-20l5,5,5-5Z"
-                    transform="translate(128 -5) rotate(180)"
-                  />
-                </g>
-                <rect
-                  className="o"
-                  width={302}
-                  height={1}
-                  transform="translate(0 43)"
-                />
-                <rect
-                  className="o"
-                  width={1}
-                  height={43}
-                  transform="translate(261.885)"
-                />
-              </g>
+            <SelectDropDownBorderedSVG changed={this.VersionTypeChanged} maskwidth={100} maskheight={20} boxwidth={342} boxheight={66}  title=""  header="Version Type" subtitle="" defaultval={this.state.mediaInfo.Client} items={[{name:"Jw"}, {name:"Rogue"}, {name:"Knuckles"} ]} className="MediaEntryInput-ClientDropDown" />
+
+              
             </g>
             <g transform="translate(0 679)">
-              <g className="h" transform="translate(0 8)">
-                <rect className="ae" width={342} height={68} rx={4} />
-                <rect className="a" x={1} y={1} width={340} height={66} rx={3} />
-              </g>
-              <rect
-                className="c"
-                width={105}
-                height={11}
-                transform="translate(11 6)"
-              />
-              <text className="j" transform="translate(17 11)">
-                <tspan x={0} y={0}>
-                  {"Content Rating"}
-                </tspan>
-              </text>
-              <g transform="translate(286 28)">
-                <rect
-                  className="p"
-                  width={34}
-                  height={14}
-                  rx={7}
-                  transform="translate(0 6.5)"
-                />
-                <g className="ag" transform="matrix(1, 0, 0, 1, -1096, -736)">
-                  <circle
-                    className="q"
-                    cx={10}
-                    cy={10}
-                    r={10}
-                    transform="translate(1111 739.5)"
-                  />
-                </g>
-              </g>
-              <text className="r" transform="translate(17 48)">
-                <tspan x={0} y={0}>
-                  {"Media contains MATURE content"}
-                </tspan>
-              </text>
+              
+          
+              <MenuItemBorderedSVG htmlcontent={<text className="r" transform="translate(0 -180)">                <tspan x={0} y={0}>                <ToggleBox label={"Media contains MATURE content"} changed={this.MatureChanged} colortheme={'primary'} placement="start"/>                  </tspan>        </text>} changed={this.MatureChanged} maskwidth={100} maskheight={20}  boxwidth={342} boxheight={66}  title=""  header="Mature Warning" subtitle="" defaultval={this.state.mediaInfo.Client} items={[{name:"Jw"}, {name:"Rogue"}, {name:"Knuckles"} ]} className="MediaEntryInput-ClientDropDown" />
+
+             
             </g>
             <g transform="translate(0 415)">
-              <g className="h" transform="translate(0 8)">
-                <rect className="ae" width={342} height={228} rx={4} />
-                <rect className="a" x={1} y={1} width={340} height={226} rx={3} />
-              </g>
-              <rect
-                className="c"
-                width={77}
-                height={11}
-                transform="translate(11 6)"
-              />
-              <text className="j" transform="translate(17 11)">
-                <tspan x={0} y={0}>
-                  {"Tags"}
-                </tspan>
-              </text>
-              <g transform="translate(17.5 16.5)">
-                <g className="af" transform="matrix(1, 0, 0, 1, -827.5, -460.5)">
-                  <rect
-                    className="c"
-                    width={308}
-                    height={44}
-                    rx={4}
-                    transform="translate(827.5 460.5)"
-                  />
-                </g>
-                <text className="l" transform="translate(7.977 28)">
-                  <tspan x={0} y={0}>
-                    {"VFX"}
-                  </tspan>
-                </text>
-                <g className="m" transform="translate(298 35) rotate(180)">
-                  <rect className="a" width={24} height={24} />
-                  <path
-                    className="n"
-                    d="M111-20l5,5,5-5Z"
-                    transform="translate(128 -5) rotate(180)"
-                  />
-                </g>
-                <rect
-                  className="o"
-                  width={302}
-                  height={1}
-                  transform="translate(0 43)"
-                />
-                <rect
-                  className="o"
-                  width={1}
-                  height={43}
-                  transform="translate(261.885)"
-                />
-              </g>
+             
+                         <SelectDropDownBorderedSVG changed={this.VersionTypeChanged} maskwidth={100} maskheight={20}  boxwidth={342} boxheight={238}  title=""  header="Tags" subtitle="" defaultval={this.state.mediaInfo.Client} items={[{name:"Jw"}, {name:"Rogue"}, {name:"Knuckles"} ]} className="MediaEntryInput-ClientDropDown" />
+
+              
               <g className="s" transform="translate(18 70)">
                 <g transform="translate(-18 -68)">
                   <g transform="translate(18 68)">
@@ -1124,20 +1025,22 @@ class UploadMediaComponent extends React.Component {
               </tspan>
             </text>
             <g transform="translate(0 783)">
-              <rect className="aa" width={342} height={32} rx={4} />
-              <text className="ab" transform="translate(160.071 21)">
-                <tspan x={-62.992} y={0}>
-                  {"Update Media Entry"}
-                </tspan>
-              </text>
+            <foreignObject width="460" height="150"  className="i" transform="translate(0 0)">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <Button className="SVGButton_PrimaryLongButtons" onClick={this.UpdateMediaEntryClicked} size='small'  variant="contained" color="primary">
+        Update Media Entry
+</Button>
+          </div>
+  </foreignObject>
             </g>
             <g transform="translate(0 843)">
-              <rect className="ac" width={342} height={32} rx={4} />
-              <text className="ab" transform="translate(160.071 21)">
-                <tspan x={-21.934} y={0}>
-                  {"Cancel"}
-                </tspan>
-              </text>
+              <foreignObject width="460" height="150"  className="i" transform="translate(0 0)">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <Button className="SVGButton_PrimaryLongButtons" onClick={this.CanceledClicked} size='small'  variant="contained" color="secondary">
+        Cancel
+</Button>
+          </div>
+  </foreignObject>
             </g>
           </g>
           <line className="ad" y2={888} transform="translate(744.5 3.5)" />

@@ -17,3 +17,24 @@
     background-color: #ebdefd;
 
 }
+
+.SVGButton_Primary{
+
+    cursor: pointer;
+    width: 191px;
+}
+.SVGButton_PrimaryLongButtons{
+
+    cursor: pointer;
+    width: 344px;
+}
+.SVGButton_PrimaryUploadMedia{
+
+    cursor: pointer;
+    width: 170px;
+}
+.SVGButton_Primary:hover{
+    background-color: aqua;
+    cursor: pointer;
+    width: 191px;
+}

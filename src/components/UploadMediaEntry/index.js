@@ -14,6 +14,8 @@ import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import SelectDropDown from '../../components/SelectDropDown';
+import SelectDropDownBordered from '../../components/SelectDropDownBordered';
 import React from "react";
 
 import '../../styles/screenit/screenitStyle.css';
@@ -28,7 +30,11 @@ class UploadMediaComponent extends React.Component {
         Title:"",
         Description:"",
         Version:"0",
-        VersionDescription:""
+        VersionDescription:"",
+        VersionType:"",
+
+        Client:"",
+        Project:""
 
 
       }
@@ -38,8 +44,18 @@ class UploadMediaComponent extends React.Component {
       this.VersionChanged = this.VersionChanged.bind(this);
       this.VersionDescriptionChanged = this.VersionDescriptionChanged.bind(this);
       this.DescriptionChanged = this.DescriptionChanged.bind(this);
+      this.ClientChanged = this.ClientChanged.bind(this);
 
   }
+
+
+  ClientChanged(val){
+
+    console.log(val);
+    this.setState({mediaInfo:val});
+
+  }
+
 
 
   TitleChanged(e){
@@ -78,6 +94,8 @@ class UploadMediaComponent extends React.Component {
 
   render() { 
     return ( 
+      <div>
+        <SelectDropDownBordered/>
       <svg viewBox="0 0 1198 953">
       <defs>
         <style>
@@ -233,11 +251,15 @@ class UploadMediaComponent extends React.Component {
                 <rect className="ae" width={493} height={56} rx={4} />
                 <rect className="a" x={1} y={1} width={491} height={54} rx={3} />
               </g>
+
+
               <foreignObject width="460" height="150"  className="i" transform="translate(16 21)">
       <div xmlns="http://www.w3.org/1999/xhtml">
       <input className="MediaEntryInput-Media" onChange={this.VersionChanged}></input>
           </div>
   </foreignObject>
+
+
               <text className="j" transform="translate(16 79)">
                 <tspan x={0} y={0}>
                   {"The version of the Media Entry."}
@@ -261,7 +283,7 @@ class UploadMediaComponent extends React.Component {
                 <rect className="ae" width={342} height={192} rx={4} />
                 <rect className="a" x={1} y={1} width={340} height={190} rx={3} />
               </g>
-              <foreignObject width="460" height="150"  className="i" transform="translate(16 21)">
+              <foreignObject width="460" height="190"  className="i" transform="translate(16 30)">
       <div xmlns="http://www.w3.org/1999/xhtml">
       <textarea className="MediaEntryInput-MediaMultiLine" rows="6" cols="36" onChange={this.DescriptionChanged}></textarea>
           </div>
@@ -290,7 +312,7 @@ class UploadMediaComponent extends React.Component {
                 <rect className="a" x={1} y={1} width={340} height={190} rx={3} />
               </g>
 
-              <foreignObject width="460" height="150"  className="i" transform="translate(16 21)">
+              <foreignObject width="460" height="150"  className="i" transform="translate(16 30)">
       <div xmlns="http://www.w3.org/1999/xhtml">
       <textarea className="MediaEntryInput-MediaMultiLine" rows="6" cols="36" onChange={this.VersionDescriptionChanged}></textarea>
           </div>
@@ -367,6 +389,12 @@ class UploadMediaComponent extends React.Component {
                   {"Client"}
                 </tspan>
               </text>
+              <foreignObject width="327" height="150"  className="i" transform="translate(2 0)">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+      <SelectDropDown changed={this.ClientChanged} title=""  subtitle="" defaultval={this.state.mediaInfo.Client} items={[{name:"Jw"}, {name:"Rogue"}, {name:"Knuckles"} ]} className="MediaEntryInput-ClientDropDown" />
+          </div>
+  </foreignObject>
+{/*               
               <g transform="translate(17.5 16.5)">
                 <g className="aj" transform="matrix(1, 0, 0, 1, -827.5, -149.5)">
                   <rect
@@ -377,6 +405,7 @@ class UploadMediaComponent extends React.Component {
                     transform="translate(827.5 149.5)"
                   />
                 </g>
+
                 <text className="l" transform="translate(7.977 28)">
                   <tspan x={0} y={0}>
                     {"Nike - NYC"}
@@ -402,7 +431,11 @@ class UploadMediaComponent extends React.Component {
                   height={43}
                   transform="translate(261.885)"
                 />
-              </g>
+              </g> */}
+
+
+
+
             </g>
             <g transform="translate(0 208)">
               <g className="h" transform="translate(0 8)">
@@ -1111,7 +1144,7 @@ class UploadMediaComponent extends React.Component {
         </g>
       </g>
     </svg>
-
+</div>
 );
 }
 }
